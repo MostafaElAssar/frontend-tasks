@@ -29,6 +29,9 @@ export default Vue.extend({})
 </script>
 
 <style scoped>
+* {
+  box-sizing: border-box;
+}
 body {
   padding: 30px;
 }
