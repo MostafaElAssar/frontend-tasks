@@ -7,34 +7,57 @@
           <th>Lastname</th>
           <th>Action</th>
         </tr>
-        <tr v-for="(person, index) in persons" :key="person.firstName + person.lastName + index">
+        <tr v-for="(person, index) in persons" :key="index">
           <td>{{ person.firstName }}</td>
           <td>{{ person.lastName }}</td>
-          <td><el-button @click="remove">Remove</el-button></td>
+          <td><el-button @click="remove(index)">Remove</el-button></td>
         </tr>
       </table>
     </div>
     <div class="input-container">
-      <el-input placeholder="Firstname"></el-input>
-      <el-input placeholder="Lastname"></el-input>
-      <el-button @click="add">Add</el-button>
+      <el-input
+        v-model="formValue.firstName"
+        placeholder="Firstname"
+      ></el-input>
+      <el-input v-model="formValue.lastName" placeholder="Lastname"></el-input>
+      <el-button
+        @click="add"
+        :disabled="!formValue.firstName || !formValue.lastName"
+        >Add</el-button
+      >
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'nuxt-property-decorator';
+import { Component, Vue } from "nuxt-property-decorator";
 
 @Component({
-  name: 'index',
+  name: "index"
 })
 export default class Index extends Vue {
-  persons = [{firstName: 'Jill', lastName: 'Smith'}, {firstName: 'Eve', lastName: 'Jackson'}];
+  formValue = {
+    firstName: "",
+    lastName: ""
+  };
 
-  add() {}
+  get persons() {
+    return this.$store.state.persons;
+  }
 
-  remove() {}
+  clearForm() {
+    this.formValue.firstName = "";
+    this.formValue.lastName = "";
+  }
 
+  add() {
+    this.$store.commit("add", { ...this.formValue });
+    this.clearForm();
+  }
+
+  remove(index: number) {
+    this.$store.commit("remove", index);
+  }
 }
 </script>
 
@@ -59,7 +82,9 @@ export default class Index extends Vue {
   margin-right: 2rem;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid black;
   padding: 15px;
 }

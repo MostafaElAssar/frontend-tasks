@@ -1,11 +1,18 @@
-import { ActionContext, ActionTree } from "vuex";
-import { RootState } from "~/types/state";
+import { MutationTree } from "vuex";
+import { Person, PersonsState } from "../types/state";
 
-export const actions: ActionTree<RootState, RootState> = {
-  async nuxtServerInit({
-    commit,
-    dispatch
-  }: ActionContext<RootState, RootState>) {},
+export const state: () => PersonsState = () => ({
+  persons: [
+    { firstName: "Jill", lastName: "Smith" },
+    { firstName: "Eve", lastName: "Jackson" }
+  ]
+});
 
-  async nuxtClientInit() {}
+export const mutations: MutationTree<PersonsState> = {
+  add(state, person: Person) {
+    state.persons.push(person);
+  },
+  remove(state, index) {
+    state.persons.splice(index, 1);
+  }
 };

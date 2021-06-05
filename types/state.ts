@@ -1,9 +1,5 @@
-export interface RootState {
-  persons: PersonsState;
-}
-
 export interface PersonsState {
-  persons: [Person] | [];
+  persons: Person[];
 }
 
 export interface Person {
