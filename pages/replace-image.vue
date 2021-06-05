@@ -3,11 +3,15 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue'
+import Vue from "vue";
 
-export default Vue.extend({})
+export default Vue.extend({});
 </script>
 
 <style scoped>
-  .logo {}
+a::after {
+  content: url("/company.jpeg");
+  position: absolute;
+  left: 0;
+}
 </style>
