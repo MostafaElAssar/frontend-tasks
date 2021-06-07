@@ -10,7 +10,7 @@ export default Vue.extend({});
 
 <style scoped>
 a::after {
-  content: url("/company.jpeg");
+  content: url("/imaginary-co.png");
   position: absolute;
   left: 0;
 }
